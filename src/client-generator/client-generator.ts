@@ -1,6 +1,4 @@
-import { Injectable } from "injection-js";
 import {
-  BsonType,
   IField,
   IObjectSchema,
   isObjectSchema,
@@ -17,53 +15,50 @@ import { assert, object, array, string } from "@hapi/joi";
 
 type Schemas = Record<string, Schema>;
 
-@Injectable()
-export class ClientGenerator {
-  generate(opts: GenerateOptions) {
-    validateGenerateOptions(opts);
-    const { collections, schemas } = opts;
-    return compile(
-      fs.readFileSync(path.join(__dirname, "client.ts.handlebars"), {
-        encoding: "utf-8"
-      })
-    )(this.makeTemplateContext(collections, schemas));
+export function generateClient(opts: GenerateOptions) {
+  validateGenerateOptions(opts);
+  const { collections, schemas } = opts;
+  return compile(
+    fs.readFileSync(path.join(__dirname, "client.ts.handlebars"), {
+      encoding: "utf-8"
+    })
+  )(makeTemplateContext(collections, schemas));
+}
+
+function makeTemplateContext(
+  collections: ModelCollection[],
+  schemas: Schemas
+): TemplateContext {
+  function createModelInterfaceName(name: string): string {
+    return `I${pascalCase(name)}`;
   }
 
-  private makeTemplateContext(
-    collections: ModelCollection[],
-    schemas: Schemas
-  ): TemplateContext {
-    function createModelInterfaceName(name: string): string {
-      return `I${pascalCase(name)}`;
-    }
-
-    return {
-      collections: collections.map(model => {
-        return {
-          name: model.name,
-          pascalName: pascalCase(model.schema),
-          modelName: createModelInterfaceName(model.schema)
-        };
-      }),
-      interfaces: Object.keys(schemas).map(schemaName => {
-        let schema = schemas[schemaName] as IObjectSchema;
-        if (!isObjectSchema(schema)) {
-          throw Error("Collection can have only object schema");
-        }
-        return {
-          name: createModelInterfaceName(schemaName),
-          fields: Object.keys(schema.fields).map(fieldName => {
-            let field = schema.fields[fieldName];
-            return {
-              name: fieldName,
-              type: getTypescriptType(field),
-              optional: field.optional
-            };
-          })
-        };
-      })
-    };
-  }
+  return {
+    collections: collections.map(model => {
+      return {
+        name: model.name,
+        pascalName: pascalCase(model.schema),
+        modelName: createModelInterfaceName(model.schema)
+      };
+    }),
+    interfaces: Object.keys(schemas).map(schemaName => {
+      let schema = schemas[schemaName] as IObjectSchema;
+      if (!isObjectSchema(schema)) {
+        throw Error("Collection can have only object schema");
+      }
+      return {
+        name: createModelInterfaceName(schemaName),
+        fields: Object.keys(schema.fields).map(fieldName => {
+          let field = schema.fields[fieldName];
+          return {
+            name: fieldName,
+            type: getTypescriptType(field),
+            optional: field.optional
+          };
+        })
+      };
+    })
+  };
 }
 
 type GenerateOptions = { collections: ModelCollection[]; schemas: Schemas };

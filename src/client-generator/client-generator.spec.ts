@@ -1,12 +1,9 @@
-import "reflect-metadata";
-import { injector } from "../providers";
-import { ClientGenerator } from "./client-generator";
 import { expect } from "chai";
+import { generateClient } from "./client-generator";
 
 describe("client generator", function() {
-  let generator = injector().get(ClientGenerator);
   it("should generate client", function() {
-    let result = generator.generate({
+    let result = generateClient({
       collections: [
         {
           name: "user",
