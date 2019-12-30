@@ -3,7 +3,9 @@ import {
   BsonType,
   IField,
   IObjectSchema,
-  isObjectSchema, JSchema,
+  isObjectSchema,
+  JModelCollection,
+  JSchema,
   ModelCollection,
   Schema
 } from "../model/modelCollection";
@@ -39,17 +41,17 @@ export class ClientGenerator {
       collections: collections.map(model => {
         return {
           name: model.name,
-          pascalName: pascalCase(model.name),
-          modelName: createModelInterfaceName(model.name)
+          pascalName: pascalCase(model.schema),
+          modelName: createModelInterfaceName(model.schema)
         };
       }),
-      interfaces: collections.map(model => {
-        let schema = schemas[model.schema] as IObjectSchema;
+      interfaces: Object.keys(schemas).map(schemaName => {
+        let schema = schemas[schemaName] as IObjectSchema;
         if (!isObjectSchema(schema)) {
           throw Error("Collection can have only object schema");
         }
         return {
-          name: createModelInterfaceName(model.name),
+          name: createModelInterfaceName(schemaName),
           fields: Object.keys(schema.fields).map(fieldName => {
             let field = schema.fields[fieldName];
             return {
@@ -70,13 +72,10 @@ function validateGenerateOptions(opts: GenerateOptions) {
   assert(
     opts,
     object({
-      collections: array().items(
-        object({
-          name: string().required(),
-          schema: string().required()
-        })
-      ),
-      schemas: object().pattern(string(),JSchema).required()
+      collections: array().items(JModelCollection),
+      schemas: object()
+        .pattern(string(), JSchema)
+        .required()
     })
   );
 }

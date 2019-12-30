@@ -8,7 +8,7 @@ export interface {{this.name}} {
 }
 {{/each}}
 
-export type CollectionName = {{#each collections}}| '{{this.name}}'
+export type CollectionName = {{#each collections}}| '{{this.name}}'{{#if @last}};{{/if}}
 {{/each}}
 
 {{#each collections}}
