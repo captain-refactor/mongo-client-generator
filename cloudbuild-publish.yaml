@@ -12,6 +12,6 @@ steps:
       - build
   - name: gcr.io/cloud-builders/npm:current
     env:
-      - NPM_AUTH_TOKEN=$_NPM_TOKEN
+      - NPM_TOKEN=$_NPM_TOKEN
     args:
       - publish
