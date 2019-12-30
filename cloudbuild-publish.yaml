@@ -1,0 +1,17 @@
+steps:
+  - name: gcr.io/cloud-builders/npm:current
+    args:
+      - i
+  - name: gcr.io/cloud-builders/npm:current
+    args:
+      - run
+      - test
+  - name: gcr.io/cloud-builders/npm:current
+    args:
+      - run
+      - build
+  - name: gcr.io/cloud-builders/npm:current
+    env:
+      - NPM_AUTH_TOKEN: $_NPM_TOKEN
+    args:
+      - publish
