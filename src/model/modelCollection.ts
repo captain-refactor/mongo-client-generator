@@ -1,4 +1,4 @@
-import { object, array, string, link, alternatives, bool } from "@hapi/joi";
+import {object, array, string, link, alternatives, bool, ObjectSchema} from "@hapi/joi";
 
 export interface ModelCollection {
   name: string;
@@ -46,9 +46,13 @@ interface BaseField {
   optional?: boolean;
 }
 
-export type IField = Schema & BaseField;
+function toFieldSchema(schema: ObjectSchema){
+  schema.keys({
+    optional: bool()
+  })
+}
 
-export const JFieldSchema = link("#JSchema").concat(JBaseField);
+export type IField = Schema & BaseField;
 
 export interface IObjectSchema {
   type: "object";
