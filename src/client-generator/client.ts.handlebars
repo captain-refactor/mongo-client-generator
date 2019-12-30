@@ -1,0 +1,34 @@
+import {Db, Collection} from 'mongodb';
+
+{{#each interfaces}}
+export interface {{this.name}} {
+    {{#each this.fields}}
+    {{this.name}}{{#if this.optional}}?{{/if}}: {{ this.type}};
+    {{/each}}
+}
+{{/each}}
+
+export type CollectionName = {{#each collections}}| '{{this.name}}'
+{{/each}}
+
+{{#each collections}}
+
+export class {{this.pascalName}}Collection {
+    get name(): CollectionName {
+        return '{{this.name}}';
+    }
+
+    get collection(): Collection<{{this.modelName}}> {
+        return this.db.collection(this.name);
+    }
+
+    constructor(public db: Db) {
+    }
+
+}
+{{/each}}
+
+
+export class MongoClient {
+
+}
