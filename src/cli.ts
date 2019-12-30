@@ -30,7 +30,7 @@ class GenerateClient extends Command {
     let config = require(configPath);
     let clientCode = generateClient(config.default);
     fs.writeFileSync(path.join(process.cwd(), flags.output), clientCode, {
-      encoding: "utf-8"
+      encoding: "utf-8",
     });
   }
 }

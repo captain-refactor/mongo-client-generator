@@ -63,7 +63,7 @@ function makeTemplateContext(
 
 export interface GenerateClientOptions {
   collections: ModelCollection[];
-  schemas: Schemas
+  schemas: Schemas;
 }
 
 function validateGenerateOptions(opts: GenerateClientOptions) {
@@ -83,14 +83,19 @@ export function getTypescriptType(field: IField): string {
   switch (field.type) {
     case "array":
       baseType = `${getTypescriptType(field.itemType)}[]`;
+      break;
     case "bool":
       baseType = "boolean";
+      break;
     case "double":
       baseType = "number";
+      break;
     case "objectid":
       baseType = "ObjectId";
+      break;
     case "string":
       baseType = "string";
+      break;
   }
   return baseType;
 }
@@ -111,3 +116,5 @@ interface TemplateContext {
     }[];
   }[];
 }
+
+

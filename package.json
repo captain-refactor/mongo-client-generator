@@ -9,8 +9,9 @@
     "test": "mocha",
     "build": "tsc",
     "makerc": "echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc",
-    "cli": "node src/cli.js"
+    "cli": "node src/cli.js -c assets/sample-config.ts -o assets/generated.ts"
   },
+  "files": [],
   "repository": {
     "type": "git",
     "url": "github.com/captain-refactor/mongo-client-generator"

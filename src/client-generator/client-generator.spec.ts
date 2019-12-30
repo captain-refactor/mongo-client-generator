@@ -24,6 +24,10 @@ describe("client generator", function() {
             name: {
               type: "string",
               optional: true
+            },
+            deleted: {
+              type: 'bool',
+              optional: true
             }
           }
         },
@@ -42,6 +46,7 @@ describe("client generator", function() {
 export interface IUser {
     email: string;
     name?: string;
+    deleted?: boolean;
 }
 export interface IProductVariant {
     sku: string;
