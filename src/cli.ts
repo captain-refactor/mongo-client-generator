@@ -1,3 +1,4 @@
+#!/usr/bin/env ts-node
 import "ts-node/register";
 import * as fs from "fs";
 import { Command, flags } from "@oclif/command";
@@ -22,7 +23,7 @@ class GenerateClient extends Command {
     const { flags } = this.parse(GenerateClient);
     let configPath = path.join(process.cwd(), flags.config);
 
-    if(!fs.existsSync(configPath)){
+    if (!fs.existsSync(configPath)) {
       throw new Error("Config file doesn't exist");
     }
 

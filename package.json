@@ -3,7 +3,7 @@
   "version": "0.3.0",
   "description": "Generate mongodb client",
   "main": "dist/index.js",
-  "bin": "dist/cli.js",
+  "bin": "src/cli.ts",
   "types": "dist/index.d.ts",
   "scripts": {
     "test": "mocha",
