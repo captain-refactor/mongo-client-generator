@@ -1,4 +1,4 @@
-#!/usr/bin/env ts-node
+#!/usr/bin/env node
 import "ts-node/register";
 import * as fs from "fs";
 import { Command, flags } from "@oclif/command";
