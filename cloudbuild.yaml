@@ -3,10 +3,3 @@ steps:
     args:
       - run
       - test
-  - name: gcr.io/cloud-builders/npm:current
-    args:
-      - run
-      - build
-  - name: gcr.io/cloud-builders/npm:current
-    args:
-      - publish
