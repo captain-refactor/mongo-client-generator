@@ -3,11 +3,13 @@
   "version": "0.2.1",
   "description": "Generate mongodb client",
   "main": "dist/index.js",
+  "bin": "dist/cli.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "test": "mocha",
     "build": "tsc",
-    "makerc": "echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc"
+    "makerc": "echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc",
+    "cli": "node dist/cli.js"
   },
   "repository": {
     "type": "git",
@@ -22,6 +24,10 @@
   "license": "MIT",
   "dependencies": {
     "@hapi/joi": "^16.1.8",
+    "@oclif/command": "^1.5.19",
+    "@oclif/config": "^1.13.3",
+    "@oclif/errors": "^1.2.2",
+    "@oclif/parser": "^3.8.4",
     "@types/chai": "^4.2.7",
     "@types/handlebars": "^4.1.0",
     "@types/hapi__joi": "^16.0.4",

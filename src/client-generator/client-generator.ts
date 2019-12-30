@@ -15,7 +15,7 @@ import { assert, object, array, string } from "@hapi/joi";
 
 type Schemas = Record<string, Schema>;
 
-export function generateClient(opts: GenerateOptions) {
+export function generateClient(opts: GenerateClientOptions) {
   validateGenerateOptions(opts);
   const { collections, schemas } = opts;
   return compile(
@@ -61,9 +61,12 @@ function makeTemplateContext(
   };
 }
 
-type GenerateOptions = { collections: ModelCollection[]; schemas: Schemas };
+export interface GenerateClientOptions {
+  collections: ModelCollection[];
+  schemas: Schemas
+}
 
-function validateGenerateOptions(opts: GenerateOptions) {
+function validateGenerateOptions(opts: GenerateClientOptions) {
   assert(
     opts,
     object({

@@ -1,1 +1,1 @@
-export { generateClient } from "./client-generator/client-generator";
+export { generateClient, GenerateClientOptions } from "./client-generator/client-generator";
