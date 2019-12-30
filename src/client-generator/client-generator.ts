@@ -19,7 +19,7 @@ export function generateClient(opts: GenerateClientOptions) {
   validateGenerateOptions(opts);
   const { collections, schemas } = opts;
   return compile(
-    fs.readFileSync(path.join(__dirname, "client.ts.handlebars"), {
+    fs.readFileSync("templates/client.ts.handlebars", {
       encoding: "utf-8"
     })
   )(makeTemplateContext(collections, schemas));
