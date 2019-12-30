@@ -7,7 +7,7 @@
   "scripts": {
     "test": "mocha",
     "build": "tsc",
-    "prepublish": "echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc"
+    "makerc": "echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc"
   },
   "repository": {
     "type": "git",
@@ -27,21 +27,19 @@
     "@types/hapi__joi": "^16.0.4",
     "@types/js-yaml": "^3.12.1",
     "@types/mocha": "^5.2.7",
-    "@types/node": "^13.1.1",
-    "chai": "^4.2.0",
     "change-case": "^4.1.1",
     "handlebars": "^4.5.3",
-    "js-yaml": "^3.13.1",
-    "json-schema-typed": "^7.0.3",
     "mocha": "^6.2.2",
     "mongodb": "^3.4.1",
-    "prettier": "^1.19.1",
-    "ts-morph": "^6.0.2",
-    "ts-node": "^8.5.4",
-    "tslib": "^1.10.0",
-    "typescript": "^3.7.3"
+    "ts-morph": "^6.0.2"
   },
   "devDependencies": {
+    "@types/node": "^13.1.1",
+    "prettier": "^1.19.1",
+    "ts-node": "^8.5.4",
+    "tslib": "^1.10.0",
+    "typescript": "^3.7.3",
+    "chai": "^4.2.0",
     "@types/mongodb": "^3.3.14"
   }
 }

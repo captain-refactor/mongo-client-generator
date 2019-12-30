@@ -14,4 +14,8 @@ steps:
     env:
       - NPM_TOKEN=$_NPM_TOKEN
     args:
+      - run
+      - makerc
+  - name: gcr.io/cloud-builders/npm:current
+    args:
       - publish
