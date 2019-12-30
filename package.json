@@ -1,6 +1,6 @@
 {
   "name": "mongo-client-generator",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Generate mongodb client",
   "main": "dist/index.js",
   "bin": "src/cli.ts",
